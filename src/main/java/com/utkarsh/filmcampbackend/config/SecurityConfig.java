@@ -48,10 +48,12 @@ public class SecurityConfig {
     }
     @Value("${app.frontend-url}")
     String frontendUrl;
+    @Value("${FRONTEND_URL2}")
+    String frontendUrl2;
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration=new CorsConfiguration();
-        configuration.addAllowedOrigin(frontendUrl);
+        configuration.setAllowedOrigins(Arrays.asList(frontendUrl,frontendUrl2));
         configuration.setAllowedMethods(Arrays.asList("POST","GET"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
