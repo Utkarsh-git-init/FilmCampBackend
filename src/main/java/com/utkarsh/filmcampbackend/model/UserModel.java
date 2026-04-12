@@ -1,8 +1,6 @@
 package com.utkarsh.filmcampbackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -10,6 +8,8 @@ import lombok.Data;
 @Data
 public class UserModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer UserId;
     private String username;
     private String password;
 }
