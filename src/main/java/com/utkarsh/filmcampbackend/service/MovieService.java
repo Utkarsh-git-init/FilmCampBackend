@@ -20,12 +20,25 @@ public class MovieService {
                 .body(TmdbMovieApiResponse.class);
         if(response!=null){
             response.getResults().forEach(movie ->{
-                movie.setPoster_path("https://image.tmdb.org/t/p/w600_and_h900_face"+movie.getPoster_path());
-                movie.setBackdrop_path("https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces"+movie.getBackdrop_path());
+                movie.completePosterPathUrl();
+                movie.completeBackdropPathUrl();
             });
             return response.getResults();
         }
         else
             return null;
+    }
+
+    public Movie getMovieById(int id) {
+        Movie movie=tmdbClient.get()
+                .uri("/movie/"+id)
+                .retrieve()
+                .body(Movie.class);
+        if(movie==null)
+            throw new Error("TMDB movie details access error");
+        movie.completeBackdropPathUrl();
+        movie.completePosterPathUrl();
+        System.out.println("moviebyid");
+        return movie;
     }
 }
