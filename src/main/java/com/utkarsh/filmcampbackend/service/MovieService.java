@@ -41,4 +41,18 @@ public class MovieService {
         System.out.println("moviebyid");
         return movie;
     }
+
+    public List<Movie> searchMovies(String query) {
+        TmdbMovieApiResponse response=tmdbClient.get()
+                .uri("/search/movie?query="+query)
+                .retrieve()
+                .body(TmdbMovieApiResponse.class);
+        assert response != null;
+        List<Movie> list=response.getResults();
+        for(Movie movie:list){
+            movie.completePosterPathUrl();
+            movie.completePosterPathUrl();
+        }
+        return list;
+    }
 }

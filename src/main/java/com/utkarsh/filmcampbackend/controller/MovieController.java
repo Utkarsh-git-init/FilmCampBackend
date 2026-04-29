@@ -16,12 +16,19 @@ public class MovieController {
     public MovieController(MovieService movieService){
         this.movieService=movieService;
     }
+
     @GetMapping("/trending")
     public List<Movie> getTrendingMovies(){
         return movieService.getTrendingMovies();
     }
+
     @GetMapping("/{id}")
     public Movie getMovieById(@PathVariable int id){
         return movieService.getMovieById(id);
+    }
+
+    @GetMapping("/search/{query}")
+    public List<Movie> searchMovies(@PathVariable String query){
+        return movieService.searchMovies(query);
     }
 }

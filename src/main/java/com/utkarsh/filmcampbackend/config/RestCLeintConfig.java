@@ -13,6 +13,7 @@ public class RestCLeintConfig {
     public RestClient restClient(){
         return RestClient.builder()
                 .baseUrl("https://api.themoviedb.org/3")
+                .defaultHeader("accept","application/json")
                 .defaultHeader("Authorization","Bearer "+tmdbKey)
                 .build();
     }

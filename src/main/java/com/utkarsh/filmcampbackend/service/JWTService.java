@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 @Service
 public class JWTService {
-    @Value("${myapp.Secret}")
+    @Value("${myapp.secret}")
     private String key;
     public String generate(String username) {
         Map<String,Object> claims=new HashMap<>();
