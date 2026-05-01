@@ -23,7 +23,7 @@ public class MovieService {
                 movie.completePosterPathUrl();
                 movie.completeBackdropPathUrl();
             });
-            return response.getResults();
+            return response.getResults().subList(0,Math.min(16,response.getResults().size()));
         }
         else
             return null;
@@ -54,5 +54,19 @@ public class MovieService {
             movie.completePosterPathUrl();
         }
         return list;
+    }
+
+    public List<Movie> getTopRatedMovies() {
+        TmdbMovieApiResponse response=tmdbClient.get()
+                .uri("/movie/top_rated")
+                .retrieve()
+                .body(TmdbMovieApiResponse.class);
+        List<Movie> movieList=response.getResults();
+        movieList=movieList.subList(0,Math.min(16,movieList.size()));
+        movieList.forEach(movie -> {
+            movie.completePosterPathUrl();
+            movie.completeBackdropPathUrl();
+        });
+        return movieList;
     }
 }

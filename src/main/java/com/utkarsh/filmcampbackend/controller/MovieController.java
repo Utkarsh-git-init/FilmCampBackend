@@ -22,6 +22,11 @@ public class MovieController {
         return movieService.getTrendingMovies();
     }
 
+    @GetMapping("/top_rated")
+    public List<Movie> getTopRatedMovies(){
+        return movieService.getTopRatedMovies();
+    }
+
     @GetMapping("/{id}")
     public Movie getMovieById(@PathVariable int id){
         return movieService.getMovieById(id);
