@@ -1,10 +1,14 @@
 package com.utkarsh.filmcampbackend.service;
 
+import com.utkarsh.filmcampbackend.model.Credits;
 import com.utkarsh.filmcampbackend.model.Movie;
+import com.utkarsh.filmcampbackend.model.MoviePersonnel;
 import com.utkarsh.filmcampbackend.model.TmdbMovieApiResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -40,6 +44,17 @@ public class MovieService {
         movie.completePosterPathUrl();
         System.out.println("moviebyid");
         return movie;
+    }
+
+    public Credits getMovieCredits(int id) {
+        Credits credits=tmdbClient.get()
+                .uri("/movie/"+id+"/credits")
+                .retrieve()
+                .body(Credits.class);
+        credits.getCast().forEach(MoviePersonnel::completeProfilePath);
+        credits.getCrew().forEach(MoviePersonnel::completeProfilePath);
+        System.out.println("creditsbyid");
+        return credits;
     }
 
     public List<Movie> searchMovies(String query) {

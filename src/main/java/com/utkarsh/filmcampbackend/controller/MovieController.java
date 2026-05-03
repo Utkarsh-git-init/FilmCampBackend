@@ -1,6 +1,8 @@
 package com.utkarsh.filmcampbackend.controller;
 
+import com.utkarsh.filmcampbackend.model.Credits;
 import com.utkarsh.filmcampbackend.model.Movie;
+import com.utkarsh.filmcampbackend.model.MoviePersonnel;
 import com.utkarsh.filmcampbackend.service.MovieService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,11 @@ public class MovieController {
     @GetMapping("/{id}")
     public Movie getMovieById(@PathVariable int id){
         return movieService.getMovieById(id);
+    }
+
+    @GetMapping("/{id}/credits")
+    public Credits getMovieCredits(@PathVariable int id){
+        return movieService.getMovieCredits(id);
     }
 
     @GetMapping("/search/{query}")
