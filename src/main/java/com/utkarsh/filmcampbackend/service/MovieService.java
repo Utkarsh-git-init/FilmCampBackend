@@ -1,14 +1,12 @@
 package com.utkarsh.filmcampbackend.service;
 
-import com.utkarsh.filmcampbackend.model.Credits;
-import com.utkarsh.filmcampbackend.model.Movie;
-import com.utkarsh.filmcampbackend.model.MoviePersonnel;
-import com.utkarsh.filmcampbackend.model.TmdbMovieApiResponse;
+import com.utkarsh.filmcampbackend.dto.CreditsDTO;
+import com.utkarsh.filmcampbackend.dto.MovieDTO;
+import com.utkarsh.filmcampbackend.dto.MoviePersonnelDTO;
+import com.utkarsh.filmcampbackend.dto.TmdbMovieApiResponseDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -17,11 +15,11 @@ public class MovieService {
     public MovieService(RestClient tmdbClient){
         this.tmdbClient=tmdbClient;
     }
-    public List<Movie> getTrendingMovies() {
-        TmdbMovieApiResponse response=tmdbClient.get()
+    public List<MovieDTO> getTrendingMovies() {
+        TmdbMovieApiResponseDTO response=tmdbClient.get()
                 .uri("/trending/movie/day")
                 .retrieve()
-                .body(TmdbMovieApiResponse.class);
+                .body(TmdbMovieApiResponseDTO.class);
         if(response!=null){
             response.getResults().forEach(movie ->{
                 movie.completePosterPathUrl();
@@ -33,11 +31,11 @@ public class MovieService {
             return null;
     }
 
-    public Movie getMovieById(int id) {
-        Movie movie=tmdbClient.get()
+    public MovieDTO getMovieById(int id) {
+        MovieDTO movie=tmdbClient.get()
                 .uri("/movie/"+id)
                 .retrieve()
-                .body(Movie.class);
+                .body(MovieDTO.class);
         if(movie==null)
             throw new Error("TMDB movie details access error");
         movie.completeBackdropPathUrl();
@@ -46,37 +44,37 @@ public class MovieService {
         return movie;
     }
 
-    public Credits getMovieCredits(int id) {
-        Credits credits=tmdbClient.get()
+    public CreditsDTO getMovieCredits(int id) {
+        CreditsDTO credits=tmdbClient.get()
                 .uri("/movie/"+id+"/credits")
                 .retrieve()
-                .body(Credits.class);
-        credits.getCast().forEach(MoviePersonnel::completeProfilePath);
-        credits.getCrew().forEach(MoviePersonnel::completeProfilePath);
+                .body(CreditsDTO.class);
+        credits.getCast().forEach(MoviePersonnelDTO::completeProfilePath);
+        credits.getCrew().forEach(MoviePersonnelDTO::completeProfilePath);
         System.out.println("creditsbyid");
         return credits;
     }
 
-    public List<Movie> searchMovies(String query) {
-        TmdbMovieApiResponse response=tmdbClient.get()
+    public List<MovieDTO> searchMovies(String query) {
+        TmdbMovieApiResponseDTO response=tmdbClient.get()
                 .uri("/search/movie?query="+query)
                 .retrieve()
-                .body(TmdbMovieApiResponse.class);
+                .body(TmdbMovieApiResponseDTO.class);
         assert response != null;
-        List<Movie> list=response.getResults();
-        for(Movie movie:list){
+        List<MovieDTO> list=response.getResults();
+        for(MovieDTO movie:list){
             movie.completePosterPathUrl();
             movie.completePosterPathUrl();
         }
         return list;
     }
 
-    public List<Movie> getTopRatedMovies() {
-        TmdbMovieApiResponse response=tmdbClient.get()
+    public List<MovieDTO> getTopRatedMovies() {
+        TmdbMovieApiResponseDTO response=tmdbClient.get()
                 .uri("/movie/top_rated")
                 .retrieve()
-                .body(TmdbMovieApiResponse.class);
-        List<Movie> movieList=response.getResults();
+                .body(TmdbMovieApiResponseDTO.class);
+        List<MovieDTO> movieList=response.getResults();
         movieList=movieList.subList(0,Math.min(16,movieList.size()));
         movieList.forEach(movie -> {
             movie.completePosterPathUrl();

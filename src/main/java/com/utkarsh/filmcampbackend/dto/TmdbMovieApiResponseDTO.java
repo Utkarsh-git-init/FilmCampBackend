@@ -1,4 +1,4 @@
-package com.utkarsh.filmcampbackend.model;
+package com.utkarsh.filmcampbackend.dto;
 
 
 import lombok.Data;
@@ -6,9 +6,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class TmdbMovieApiResponse {
+public class TmdbMovieApiResponseDTO {
     private int page;
-    private List<Movie> results;
+    private List<MovieDTO> results;
     private int total_Pages;
     private int total_results;
 }

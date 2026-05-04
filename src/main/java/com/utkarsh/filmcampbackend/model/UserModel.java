@@ -9,7 +9,7 @@ import lombok.Data;
 public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer UserId;
+    private Integer userId;
     private String username;
     private String password;
 }

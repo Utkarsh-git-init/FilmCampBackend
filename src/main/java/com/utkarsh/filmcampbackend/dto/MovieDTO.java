@@ -1,11 +1,12 @@
-package com.utkarsh.filmcampbackend.model;
+package com.utkarsh.filmcampbackend.dto;
 
 import lombok.Data;
+import org.apache.tomcat.util.json.JSONFilter;
 
 import java.util.Date;
 
 @Data
-public class Movie {
+public class MovieDTO {
     private int id;
     private String title;
     private String overview;
@@ -13,9 +14,9 @@ public class Movie {
     private Date release_date;
     private String backdrop_path;
     private boolean adult;
-    private int budget;
-    private int revenue;
-    private Genre[] genres;
+    private long budget;
+    private long revenue;
+    private GenreDTO[] genres;
     private String tagline;
     private int runtime;
     public void completePosterPathUrl(){

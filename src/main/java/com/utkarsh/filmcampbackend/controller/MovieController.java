@@ -1,8 +1,7 @@
 package com.utkarsh.filmcampbackend.controller;
 
-import com.utkarsh.filmcampbackend.model.Credits;
-import com.utkarsh.filmcampbackend.model.Movie;
-import com.utkarsh.filmcampbackend.model.MoviePersonnel;
+import com.utkarsh.filmcampbackend.dto.CreditsDTO;
+import com.utkarsh.filmcampbackend.dto.MovieDTO;
 import com.utkarsh.filmcampbackend.service.MovieService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,27 +19,27 @@ public class MovieController {
     }
 
     @GetMapping("/trending")
-    public List<Movie> getTrendingMovies(){
+    public List<MovieDTO> getTrendingMovies(){
         return movieService.getTrendingMovies();
     }
 
     @GetMapping("/top_rated")
-    public List<Movie> getTopRatedMovies(){
+    public List<MovieDTO> getTopRatedMovies(){
         return movieService.getTopRatedMovies();
     }
 
     @GetMapping("/{id}")
-    public Movie getMovieById(@PathVariable int id){
+    public MovieDTO getMovieById(@PathVariable int id){
         return movieService.getMovieById(id);
     }
 
     @GetMapping("/{id}/credits")
-    public Credits getMovieCredits(@PathVariable int id){
+    public CreditsDTO getMovieCredits(@PathVariable int id){
         return movieService.getMovieCredits(id);
     }
 
     @GetMapping("/search/{query}")
-    public List<Movie> searchMovies(@PathVariable String query){
+    public List<MovieDTO> searchMovies(@PathVariable String query){
         return movieService.searchMovies(query);
     }
 }

@@ -1,9 +1,9 @@
-package com.utkarsh.filmcampbackend.model;
+package com.utkarsh.filmcampbackend.dto;
 
 import lombok.Data;
 
 @Data
-public class MoviePersonnel {
+public class MoviePersonnelDTO {
     int id;
     String known_for_department;
     String name;
