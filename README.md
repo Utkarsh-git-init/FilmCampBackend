@@ -1,7 +1,7 @@
 # FilmCamp Backend
 The robust, high-performance RESTful backbone for the FilmCamp movie tracking system.
 
-<h3>Core Functionalities</h3>
+## Features
 * Fetch movie data from external API (TMDB)
 * User Management: Secure registration and authentication using Spring Security and JWT.
 * Movie Metadata: Logic for fetching, caching, and serving movie data.
