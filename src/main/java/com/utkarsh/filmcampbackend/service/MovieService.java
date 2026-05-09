@@ -55,18 +55,14 @@ public class MovieService {
         return credits;
     }
 
-    public List<MovieDTO> searchMovies(String query) {
+    public TmdbMovieApiResponseDTO searchMovies(String query,int page) {
         TmdbMovieApiResponseDTO response=tmdbClient.get()
-                .uri("/search/movie?query="+query)
+                .uri("/search/movie?query="+query+"&page="+page)
                 .retrieve()
                 .body(TmdbMovieApiResponseDTO.class);
         assert response != null;
-        List<MovieDTO> list=response.getResults();
-        for(MovieDTO movie:list){
-            movie.completePosterPathUrl();
-            movie.completePosterPathUrl();
-        }
-        return list;
+        response.completeImagePaths();
+        return response;
     }
 
     public List<MovieDTO> getTopRatedMovies() {

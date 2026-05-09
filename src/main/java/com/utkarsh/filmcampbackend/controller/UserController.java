@@ -1,10 +1,12 @@
 package com.utkarsh.filmcampbackend.controller;
 
 import com.utkarsh.filmcampbackend.model.UserModel;
+import com.utkarsh.filmcampbackend.model.UserPrincipal;
 import com.utkarsh.filmcampbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,8 +26,8 @@ public class UserController {
     }
 
     @GetMapping("/isauthenticated")
-    public ResponseEntity<String> isAuthorised(){
-        System.out.println("HEllo");
-        return ResponseEntity.accepted().body("User is Authenticated");
+    public ResponseEntity<String> isAuthorised(@AuthenticationPrincipal UserPrincipal userPrincipal){
+        System.out.println("isAuthenticated");
+        return ResponseEntity.accepted().body(userPrincipal.getUsername());
     }
 }

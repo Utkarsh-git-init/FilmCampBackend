@@ -11,6 +11,8 @@ import com.utkarsh.filmcampbackend.repository.UserRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserMovieInteractionsService {
 
@@ -31,7 +33,7 @@ public class UserMovieInteractionsService {
                     MovieEntity newMovie=new MovieEntity();
                     newMovie.setId(request.getMovieId());
                     newMovie.setTitle(request.getTitle());
-                    newMovie.setPoster_path(request.getPoster_path());
+                    newMovie.setPosterPath(request.getPoster_path());
                     return movieRepo.save(newMovie);
                 });
         UserModel user=userRepo.getReferenceById(userPrincipal.getUserId());
@@ -45,7 +47,7 @@ public class UserMovieInteractionsService {
         interactions.setLiked(request.isLiked());
         interactions.setWatched(request.isWatched());
         interactions.setRating(request.getRating());
-        interactions.setIn_watchlist(request.isIn_watchlist());
+        interactions.setIn_watchlist(request.isInWatchlist());
         interactionsRepo.save(interactions);
     }
 
@@ -64,13 +66,22 @@ public class UserMovieInteractionsService {
                 UserMovieInteractionsDTO userMovieInteractionsDTO=new UserMovieInteractionsDTO();
                 userMovieInteractionsDTO.setMovieId(interactions.getMovie().getId());
                 userMovieInteractionsDTO.setTitle(interactions.getMovie().getTitle());
-                userMovieInteractionsDTO.setPoster_path(interactions.getMovie().getPoster_path());
+                userMovieInteractionsDTO.setPoster_path(interactions.getMovie().getPosterPath());
                 userMovieInteractionsDTO.setRating(interactions.getRating());
                 userMovieInteractionsDTO.setLiked(interactions.isLiked());
                 userMovieInteractionsDTO.setWatched(interactions.isWatched());
-                userMovieInteractionsDTO.setIn_watchlist(interactions.isIn_watchlist());
+                userMovieInteractionsDTO.setInWatchlist(interactions.isIn_watchlist());
+                userMovieInteractionsDTO.setUpdatedAt(interactions.getUpdatedAt());
                 return userMovieInteractionsDTO;
             }
         }
+    }
+
+    public List<MovieEntity> getRecentlyInteractedMovies(UserPrincipal userPrincipal) {
+        UserModel user=userRepo.getReferenceById(userPrincipal.getUserId());
+        List<UserMovieInteractions> rows=interactionsRepo.findTop4ByUserOrderByUpdatedAtDesc(user);
+        return rows.stream()
+                .map(UserMovieInteractions::getMovie)
+                .toList();
     }
 }

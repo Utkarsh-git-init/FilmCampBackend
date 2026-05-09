@@ -9,6 +9,13 @@ import java.util.List;
 public class TmdbMovieApiResponseDTO {
     private int page;
     private List<MovieDTO> results;
-    private int total_Pages;
+    private int total_pages;
     private int total_results;
+
+    public void completeImagePaths(){
+        this.results.forEach(movieDTO -> {
+            movieDTO.completePosterPathUrl();
+            movieDTO.completeBackdropPathUrl();
+        });
+    }
 }

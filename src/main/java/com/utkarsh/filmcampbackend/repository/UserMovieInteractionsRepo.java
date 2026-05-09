@@ -6,10 +6,14 @@ import com.utkarsh.filmcampbackend.model.UserMovieInteractions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface UserMovieInteractionsRepo extends JpaRepository<UserMovieInteractions,Integer> {
 
     Optional<UserMovieInteractions> findByUserAndMovie(UserModel user, MovieEntity movie);
+
+    List<UserMovieInteractions> findTop4ByUserOrderByUpdatedAtDesc(UserModel user);
+
 }

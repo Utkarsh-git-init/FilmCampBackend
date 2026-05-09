@@ -2,6 +2,7 @@ package com.utkarsh.filmcampbackend.controller;
 
 import com.utkarsh.filmcampbackend.dto.CreditsDTO;
 import com.utkarsh.filmcampbackend.dto.MovieDTO;
+import com.utkarsh.filmcampbackend.dto.TmdbMovieApiResponseDTO;
 import com.utkarsh.filmcampbackend.service.MovieService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +39,8 @@ public class MovieController {
         return movieService.getMovieCredits(id);
     }
 
-    @GetMapping("/search/{query}")
-    public List<MovieDTO> searchMovies(@PathVariable String query){
-        return movieService.searchMovies(query);
+    @GetMapping("/search/{query}/{page}")
+    public TmdbMovieApiResponseDTO searchMovies(@PathVariable String query, @PathVariable int page){
+        return movieService.searchMovies(query,page);
     }
 }

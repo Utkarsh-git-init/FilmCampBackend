@@ -1,8 +1,9 @@
 package com.utkarsh.filmcampbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.time.OffsetDateTime;
 
 @Data
 public class UserMovieInteractionsDTO {
@@ -11,6 +12,9 @@ public class UserMovieInteractionsDTO {
     private String title;
     private boolean watched;
     private boolean liked;
-    private boolean in_watchlist;
+    @JsonProperty("in_watchlist")
+    private boolean inWatchlist;
     private float rating;
+    @JsonProperty("updated_at")
+    private OffsetDateTime updatedAt;
 }

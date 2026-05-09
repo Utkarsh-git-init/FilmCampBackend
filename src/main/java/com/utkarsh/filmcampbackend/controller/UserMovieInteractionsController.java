@@ -1,7 +1,6 @@
 package com.utkarsh.filmcampbackend.controller;
 
 import com.utkarsh.filmcampbackend.dto.UserMovieInteractionsDTO;
-import com.utkarsh.filmcampbackend.model.UserMovieInteractions;
 import com.utkarsh.filmcampbackend.model.UserPrincipal;
 import com.utkarsh.filmcampbackend.service.UserMovieInteractionsService;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +30,11 @@ public class UserMovieInteractionsController {
         System.out.println("get interaction state");
         return ResponseEntity.ok()
             .body(Objects.requireNonNullElse(interactions, "Not yet interacted"));
+    }
+
+    @GetMapping("/recent_activity")
+    public ResponseEntity<?> getRecentlyInteractedMovies(@AuthenticationPrincipal UserPrincipal userPrincipal){
+        return ResponseEntity.ok()
+                .body(service.getRecentlyInteractedMovies(userPrincipal));
     }
 }
