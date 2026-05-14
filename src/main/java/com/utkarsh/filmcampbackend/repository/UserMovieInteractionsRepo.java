@@ -16,4 +16,9 @@ public interface UserMovieInteractionsRepo extends JpaRepository<UserMovieIntera
 
     List<UserMovieInteractions> findTop4ByUserOrderByUpdatedAtDesc(UserModel user);
 
+    List<UserMovieInteractions> findAllByUserAndInWatchlistIsTrue(UserModel user);
+
+    List<UserMovieInteractions> findAllByUserAndLikedIsTrue(UserModel user);
+
+    List<UserMovieInteractions> findAllByUserAndWatchedIsTrue(UserModel user);
 }

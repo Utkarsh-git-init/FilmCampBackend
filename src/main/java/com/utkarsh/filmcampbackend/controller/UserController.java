@@ -1,5 +1,6 @@
 package com.utkarsh.filmcampbackend.controller;
 
+import com.utkarsh.filmcampbackend.dto.UserDTO;
 import com.utkarsh.filmcampbackend.model.UserModel;
 import com.utkarsh.filmcampbackend.model.UserPrincipal;
 import com.utkarsh.filmcampbackend.service.UserService;
@@ -26,8 +27,9 @@ public class UserController {
     }
 
     @GetMapping("/isauthenticated")
-    public ResponseEntity<String> isAuthorised(@AuthenticationPrincipal UserPrincipal userPrincipal){
+    public ResponseEntity<UserDTO> isAuthorised(@AuthenticationPrincipal UserPrincipal userPrincipal){
         System.out.println("isAuthenticated");
-        return ResponseEntity.accepted().body(userPrincipal.getUsername());
+        return ResponseEntity.accepted()
+                .body(new UserDTO(userPrincipal.getUserId(),userPrincipal.getUsername()));
     }
 }

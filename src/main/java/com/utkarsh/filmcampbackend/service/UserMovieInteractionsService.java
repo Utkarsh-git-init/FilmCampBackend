@@ -47,7 +47,7 @@ public class UserMovieInteractionsService {
         interactions.setLiked(request.isLiked());
         interactions.setWatched(request.isWatched());
         interactions.setRating(request.getRating());
-        interactions.setIn_watchlist(request.isInWatchlist());
+        interactions.setInWatchlist(request.isInWatchlist());
         interactionsRepo.save(interactions);
     }
 
@@ -70,7 +70,7 @@ public class UserMovieInteractionsService {
                 userMovieInteractionsDTO.setRating(interactions.getRating());
                 userMovieInteractionsDTO.setLiked(interactions.isLiked());
                 userMovieInteractionsDTO.setWatched(interactions.isWatched());
-                userMovieInteractionsDTO.setInWatchlist(interactions.isIn_watchlist());
+                userMovieInteractionsDTO.setInWatchlist(interactions.isInWatchlist());
                 userMovieInteractionsDTO.setUpdatedAt(interactions.getUpdatedAt());
                 return userMovieInteractionsDTO;
             }

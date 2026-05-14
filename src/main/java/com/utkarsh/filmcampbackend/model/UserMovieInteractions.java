@@ -23,7 +23,7 @@ public class UserMovieInteractions {
     private boolean liked=false;
     private float rating=0;
     @Column(name = "in_watchlist")
-    private boolean in_watchlist=false;
+    private boolean inWatchlist=false;
     @UpdateTimestamp
     @Column(name = "updated_at")
     private OffsetDateTime updatedAt;
