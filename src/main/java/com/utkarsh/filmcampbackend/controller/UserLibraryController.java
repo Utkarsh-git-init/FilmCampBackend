@@ -19,25 +19,25 @@ public class UserLibraryController {
         this.userLibraryService = userLibraryService;
     }
 
-    @GetMapping("/{userId}/recent_activity")
-    public ResponseEntity<?> getRecentlyInteractedMovies(@PathVariable int userId){
+    @GetMapping("/{username}/recent_activity")
+    public ResponseEntity<?> getRecentlyInteractedMovies(@PathVariable String username){
        return ResponseEntity.ok()
-               .body(userLibraryService.getRecentlyInteractedMovies(userId));
+               .body(userLibraryService.getRecentlyInteractedMovies(username));
     }
-    @GetMapping("/{userId}/watched")
-    public ResponseEntity<List<MovieEntity>> getWatched(@PathVariable int userId){
+    @GetMapping("/{username}/watched")
+    public ResponseEntity<List<MovieEntity>> getWatched(@PathVariable String username){
         return ResponseEntity.ok()
-                .body(userLibraryService.getWatched(userId));
+                .body(userLibraryService.getWatched(username));
     }
-    @GetMapping("/{userId}/liked")
-    public ResponseEntity<List<MovieEntity>> getLiked(@PathVariable int userId){
+    @GetMapping("/{username}/liked")
+    public ResponseEntity<List<MovieEntity>> getLiked(@PathVariable String username){
         return  ResponseEntity.ok()
-                .body(userLibraryService.getLiked(userId));
+                .body(userLibraryService.getLiked(username));
     }
-    @GetMapping("/{userId}/watchlist")
-    public ResponseEntity<List<MovieEntity>> getWatchlist(@PathVariable int userId){
+    @GetMapping("/{username}/watchlist")
+    public ResponseEntity<List<MovieEntity>> getWatchlist(@PathVariable String username){
         return ResponseEntity.ok()
-                .body(userLibraryService.getWatchlist(userId));
+                .body(userLibraryService.getWatchlist(username));
     }
 
 }

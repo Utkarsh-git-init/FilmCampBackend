@@ -19,31 +19,31 @@ public class UserLibraryService {
         this.userMovieInteractionsRepo = userMovieInteractionsRepo;
     }
 
-    public List<MovieEntity> getRecentlyInteractedMovies(int userId) {
-        UserModel user=userRepo.getReferenceById(userId);
+    public List<MovieEntity> getRecentlyInteractedMovies(String username) {
+        UserModel user=userRepo.findByUsername(username);
         List<UserMovieInteractions> list=userMovieInteractionsRepo.findTop4ByUserOrderByUpdatedAtDesc(user);
         return list.stream()
                 .map(UserMovieInteractions::getMovie)
                 .toList();
     }
 
-    public List<MovieEntity> getWatchlist(int userId){
-        UserModel user=userRepo.getReferenceById(userId);
+    public List<MovieEntity> getWatchlist(String username){
+        UserModel user=userRepo.findByUsername(username);
         List<UserMovieInteractions> list=userMovieInteractionsRepo.findAllByUserAndInWatchlistIsTrue(user);
         return list.stream()
                 .map(UserMovieInteractions::getMovie)
                 .toList();
     }
 
-    public List<MovieEntity> getLiked(int userId){
-        UserModel user=userRepo.getReferenceById(userId);
+    public List<MovieEntity> getLiked(String username){
+        UserModel user=userRepo.findByUsername(username);
         List<UserMovieInteractions> list=userMovieInteractionsRepo.findAllByUserAndLikedIsTrue(user);
         return list.stream()
                 .map(UserMovieInteractions::getMovie)
                 .toList();
     }
-    public List<MovieEntity> getWatched(int userId){
-        UserModel user=userRepo.getReferenceById(userId);
+    public List<MovieEntity> getWatched(String username){
+        UserModel user=userRepo.findByUsername(username);
         List<UserMovieInteractions> list=userMovieInteractionsRepo.findAllByUserAndWatchedIsTrue(user);
         return list.stream()
                 .map(UserMovieInteractions::getMovie)
