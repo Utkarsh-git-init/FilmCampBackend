@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CommentsService {
+public class ReviewService {
 
     private final ReviewRepo reviewRepo;
     private final UserRepo userRepo;
     private final MovieRepo movieRepo;
 
-    public CommentsService(ReviewRepo reviewRepo, UserRepo userRepo, MovieRepo movieRepo) {
+    public ReviewService(ReviewRepo reviewRepo, UserRepo userRepo, MovieRepo movieRepo) {
         this.reviewRepo = reviewRepo;
         this.userRepo = userRepo;
         this.movieRepo = movieRepo;

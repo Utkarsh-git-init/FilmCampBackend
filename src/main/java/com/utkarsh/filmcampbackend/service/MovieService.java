@@ -4,6 +4,9 @@ import com.utkarsh.filmcampbackend.dto.CreditsDTO;
 import com.utkarsh.filmcampbackend.dto.MovieDTO;
 import com.utkarsh.filmcampbackend.dto.MoviePersonnelDTO;
 import com.utkarsh.filmcampbackend.dto.TmdbMovieApiResponseDTO;
+import com.utkarsh.filmcampbackend.model.MovieEntity;
+import com.utkarsh.filmcampbackend.repository.ReviewRepo;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -11,9 +14,11 @@ import java.util.List;
 
 @Service
 public class MovieService {
+    private final ReviewRepo reviewRepo;
     RestClient tmdbClient;
-    public MovieService(RestClient tmdbClient){
+    public MovieService(RestClient tmdbClient, ReviewRepo reviewRepo){
         this.tmdbClient=tmdbClient;
+        this.reviewRepo = reviewRepo;
     }
     public List<MovieDTO> getTrendingMovies() {
         TmdbMovieApiResponseDTO response=tmdbClient.get()
@@ -77,5 +82,9 @@ public class MovieService {
             movie.completeBackdropPathUrl();
         });
         return movieList;
+    }
+
+    public List<MovieEntity> getPopularMoviesOnFilmCamp() {
+        return reviewRepo.findMoviesWithMostReviews(PageRequest.of(0,16));
     }
 }
