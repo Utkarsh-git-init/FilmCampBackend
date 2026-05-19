@@ -34,7 +34,21 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req->req
-                        .requestMatchers("/user/register","/user/login","/healthcheck").permitAll()
+                        .requestMatchers("/user/register",
+                                "/user/login",
+                                "/healthcheck",
+                                "/movie/search/**",
+                                "/movie/trending",
+                                "/movie/top_rated",
+                                "/movie/*/reviews",
+                                "/movie/popular_on_film_camp",
+                                "/movie/*",
+                                "/movie/*/credits",
+                                "/u/*/liked",
+                                "/u/*/recent_activity",
+                                "/u/*/watched",
+                                "/u/*/watchlist"
+                                ).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

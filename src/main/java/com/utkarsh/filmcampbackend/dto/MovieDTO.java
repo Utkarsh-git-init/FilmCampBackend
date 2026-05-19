@@ -24,9 +24,11 @@ public class MovieDTO {
     private String tagline;
     private int runtime;
     public void completePosterPathUrl(){
-        this.setPosterPath("https://image.tmdb.org/t/p/w600_and_h900_face"+this.posterPath);
+        if(this.posterPath!=null)
+            this.setPosterPath("https://image.tmdb.org/t/p/w600_and_h900_face"+this.posterPath);
     }
     public void completeBackdropPathUrl(){
-        this.setBackdropPath("https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces"+this.backdropPath);
+        if(this.posterPath!=null)
+            this.setBackdropPath("https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces"+this.backdropPath);
     }
 }
