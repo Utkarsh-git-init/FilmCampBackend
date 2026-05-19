@@ -16,8 +16,9 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column(name = "movie_id")
-    Integer movieId;
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    MovieEntity movie;
     @ManyToOne
     @JoinColumn(name = "user_id")
     UserModel user;
