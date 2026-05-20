@@ -47,7 +47,8 @@ public class SecurityConfig {
                                 "/u/*/liked",
                                 "/u/*/recent_activity",
                                 "/u/*/watched",
-                                "/u/*/watchlist"
+                                "/u/*/watchlist",
+                                "/feed/collider"
                                 ).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

@@ -10,11 +10,19 @@ public class RestCLeintConfig {
     @Value("${tmdb.api-key}")
     String tmdbKey;
     @Bean
-    public RestClient restClient(){
+    public RestClient tmdbRestClient(){
         return RestClient.builder()
                 .baseUrl("https://api.themoviedb.org/3")
                 .defaultHeader("accept","application/json")
                 .defaultHeader("Authorization","Bearer "+tmdbKey)
                 .build();
     }
+
+    @Bean
+    public RestClient rssRestClient(){
+        return RestClient.builder()
+                .defaultHeader("accept","application/rss+xml")
+                .build();
+    }
+
 }
