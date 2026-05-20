@@ -15,7 +15,7 @@ public class CacheConfig {
     public CacheManager cacheManager(){
         CaffeineCacheManager cacheManager=new CaffeineCacheManager();
         cacheManager.registerCustomCache(
-                "feed:collider",Caffeine.newBuilder()
+                "feed:slashfilm",Caffeine.newBuilder()
                         .expireAfterWrite(60, TimeUnit.MINUTES)
                         .build()
         );

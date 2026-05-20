@@ -21,11 +21,11 @@ public class FeedService {
         this.restClient = restClient;
     }
 
-    @Cacheable("feed:collider")
-    public List<ColliderArticleDTO> getColliderFeed(){
+    @Cacheable("feed:slashfilm")
+    public List<ColliderArticleDTO> getSlashFilmFeed(){
         try {
             String rss=restClient.get()
-                    .uri("https://collider.com/feed/")
+                    .uri("https://www.slashfilm.com/feed/")
                     .retrieve()
                     .body(String.class);
             SyndFeedInput input=new SyndFeedInput();

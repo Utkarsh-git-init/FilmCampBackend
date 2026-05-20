@@ -17,8 +17,8 @@ public class FeedController {
         this.feedService = feedService;
     }
 
-    @GetMapping("/collider")
-    public List<ColliderArticleDTO> getColliderFeed(){
-        return feedService.getColliderFeed();
+    @GetMapping("/slashfilm")
+    public List<ColliderArticleDTO> getSlashFilmFeed(){
+        return feedService.getSlashFilmFeed();
     }
 }
