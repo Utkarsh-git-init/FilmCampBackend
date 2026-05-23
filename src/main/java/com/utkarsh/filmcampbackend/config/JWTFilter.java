@@ -30,7 +30,16 @@ public class JWTFilter extends OncePerRequestFilter {
         String userName=null;
         if(authHeader!=null&&authHeader.startsWith("Bearer ")){
             token= authHeader.substring(7);
-            userName=jwtService.extractUsername(token);
+            try {
+                userName = jwtService.extractUsername(token);
+            } catch (io.jsonwebtoken.ExpiredJwtException e) {
+                // The token is expired! We log it quietly and leave userName as null.
+                // This allows public endpoints to still work for this mobile user.
+                logger.info("An expired JWT token was sent to the server. Proceeding as anonymous.");
+            } catch (io.jsonwebtoken.JwtException e) {
+                // This catches other token errors (like bad signatures or malformed strings)
+                logger.info("An invalid JWT token was sent to the server. Proceeding as anonymous.");
+            }
         }
         if(userName!=null&& SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails=context.getBean(MyUserDetailsService.class).loadUserByUsername(userName);
