@@ -17,6 +17,6 @@ public class MoviePersonnelDTO {
 
     public void completeProfilePath(){
         if(this.profilePath!=null)
-            this.profilePath="https://media.themoviedb.org/t/p/w300_and_h450_face"+this.profilePath;
+            this.profilePath="https://image.tmdb.org/t/p/w300_and_h450_face"+this.profilePath;
     }
 }

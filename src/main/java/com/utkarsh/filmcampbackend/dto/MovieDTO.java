@@ -29,6 +29,6 @@ public class MovieDTO {
     }
     public void completeBackdropPathUrl(){
         if(this.posterPath!=null)
-            this.setBackdropPath("https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces"+this.backdropPath);
+            this.setBackdropPath("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces"+this.backdropPath);
     }
 }
